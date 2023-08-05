@@ -33,13 +33,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm install
 
       - name: Publish package
         run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           BUILD_VERSION=$(npm pkg get version 2> /dev/null | sed 's/"//g')
           echo "set build version: $BUILD_VERSION"
           SHORT_COMMIT=$(git rev-parse --short HEAD)

@@ -46,7 +46,7 @@ jobs:
 
       - name: Publish package
         run: |
-          echo "//registry.npmjs.org/:_authToken=\${NODE_AUTH_TOKEN}" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
           echo "registry=https://registry.npmjs.org/" >> .npmrc
           echo "always-auth=true" >> .npmrc
           BUILD_VERSION=$(npm pkg get version 2> /dev/null | sed 's/"//g')
@@ -55,5 +55,3 @@ jobs:
           npm version $SEMVER_VERSION
           cat .npmrc
           npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

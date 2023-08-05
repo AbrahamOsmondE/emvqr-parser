@@ -4,17 +4,17 @@ on:
   pull_request:
 
 jobs:
-  build_and_test:
+  Build and Test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 18  # Change this to your desired Node.js version
+          node-version: '16.x'
 
       - name: Install dependencies
         run: npm install
@@ -23,3 +23,27 @@ jobs:
         run: |
           npm run build
           npm run test
+  Pre-publish Package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Publish package
+        run: |
+          BUILD_VERSION=$(npm pkg get version 2> /dev/null | sed 's/"//g')
+          echo "::set-output name=build_version::$BUILD_VERSION"
+          SHORT_COMMIT=$(git rev-parse --short HEAD)
+          echo "::set-output name=short_commit::$SHORT_COMMIT"
+          npm publish --no-git-tag-version --new-version $(BUILD_VERSION)-$(SHORT_COMMIT)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

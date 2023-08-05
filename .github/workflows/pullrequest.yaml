@@ -49,6 +49,7 @@ jobs:
           SHORT_COMMIT=$(git rev-parse --short HEAD)
           SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"
           npm version $SEMVER_VERSION
+          cat .npmrc
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

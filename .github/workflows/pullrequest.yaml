@@ -33,14 +33,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Config Github
-        run: |
-          git config --global user.email abraham.osmond@gmail.com
-          git config --global user.name abrahamosmonde
       - name: Publish package
         run: |
           echo "@abrahamosmonde:registry=https://npm.pkg.github.com" > .npmrc
@@ -50,3 +47,5 @@ jobs:
           SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"
           npm version $SEMVER_VERSION
           npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

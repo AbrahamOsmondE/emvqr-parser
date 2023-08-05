@@ -1,5 +1,5 @@
 {
-  "name": "@abrahamosmonde/emvqr-parser",
+  "name": "emvqr-parser",
   "description": "JavaScript library for parsing EMV QR Codes",
   "version": "1.0.1",
   "main": "build/index.js",

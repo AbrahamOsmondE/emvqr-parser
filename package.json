@@ -29,7 +29,7 @@
     "typescript": "^5.1.6"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "type": "commonjs"
 }

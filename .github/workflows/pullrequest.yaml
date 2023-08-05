@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  Build and Test:
+  build_ant_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,7 @@ jobs:
         run: |
           npm run build
           npm run test
-  Pre-publish Package:
+  prepublish_package:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

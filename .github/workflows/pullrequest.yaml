@@ -45,8 +45,6 @@ jobs:
 
       - name: Publish package
         run: |
-          echo "@abrahamosmonde:registry=https://npm.pkg.github.com" > .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           BUILD_VERSION=$(npm pkg get version 2> /dev/null | sed 's/"//g')
           SHORT_COMMIT=$(git rev-parse --short HEAD)
           SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"

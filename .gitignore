@@ -29,6 +29,7 @@ env.json
 *.log
 *.out
 .*.out
+.npmrc
 # docker db files
 docker/dynamodb
 docker/dynamodb-local

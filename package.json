@@ -1,7 +1,7 @@
 {
   "name": "emvqr-parser",
   "description": "JavaScript library for parsing EMV QR Codes",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {

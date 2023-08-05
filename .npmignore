@@ -1,0 +1,33 @@
+# OS files
+.DS_Store
+# IDEA
+.vscode
+.idea
+# npm
+.npmrc
+# aws cli
+./aws-sam
+.aws-sam/
+# CDK assets
+.cdk.staging
+cdk.out
+# postgres
+*.pgsql
+# projects
+secrets/
+env.json
+.env
+.env.deploy
+.make.env
+.integrationtest.env
+*.log
+*.out
+.*.out
+.npmrc
+# docker db files
+docker/dynamodb
+docker/dynamodb-local
+# test report files
+coverage
+report.json
+test-report.html

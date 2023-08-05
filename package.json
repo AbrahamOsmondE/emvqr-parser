@@ -1,8 +1,9 @@
 {
-  "name": "@abrahamosmonde/emvqr-parser",
+  "name": "emvqr-parser",
   "description": "JavaScript library for parsing EMV QR Codes",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "build": "tsc && tsc-alias",
     "test": "jest --silent=false --forceExit",
@@ -10,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AbrahamOEd/emvqr-parser.git"
+    "url": "https://github.com/AbrahamOsmondE/emvqr-parser.git"
   },
   "licese": "UNLICENSED",
   "author": "AbrahamOsmondE",
@@ -27,8 +28,11 @@
     "tsc-alias": "^1.8.2",
     "typescript": "^5.1.6"
   },
+  "files": [
+    "build/*"
+  ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "type": "commonjs"
 }

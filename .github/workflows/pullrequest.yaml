@@ -47,6 +47,6 @@ jobs:
           echo "get commit id: $SHORT_COMMIT"
           SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"
           echo "semantic version for npm publish: $SEMVER_VERSION"
-          npm publish --no-git-tag-version --new-version "$BUILD_VERSION-$SHORT_COMMIT" --access public
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

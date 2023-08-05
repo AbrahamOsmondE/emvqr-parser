@@ -3,6 +3,7 @@
   "description": "JavaScript library for parsing EMV QR Codes",
   "version": "1.0.1",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "build": "tsc && tsc-alias",
     "test": "jest --silent=false --forceExit",

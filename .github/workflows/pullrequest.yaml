@@ -44,6 +44,7 @@ jobs:
           echo "set build version: $BUILD_VERSION"
           SHORT_COMMIT=$(git rev-parse --short HEAD)
           echo "get commit id: $SHORT_COMMIT"
+          cat .npmrc
           npm publish --no-git-tag-version --new-version "$BUILD_VERSION-$SHORT_COMMIT"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

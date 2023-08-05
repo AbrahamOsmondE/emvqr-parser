@@ -42,11 +42,9 @@ jobs:
           echo "@abrahamosmonde:registry=https://npm.pkg.github.com" > .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           BUILD_VERSION=$(npm pkg get version 2> /dev/null | sed 's/"//g')
-          echo "set build version: $BUILD_VERSION"
           SHORT_COMMIT=$(git rev-parse --short HEAD)
-          echo "get commit id: $SHORT_COMMIT"
           SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"
-          echo "semantic version for npm publish: $SEMVER_VERSION"
+          npm version $SEMVER_VERSION
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

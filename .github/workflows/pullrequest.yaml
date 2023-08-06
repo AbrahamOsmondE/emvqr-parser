@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm build
+          npm run build
 
       - name: Config Github
         run: |

@@ -52,13 +52,6 @@ jobs:
           curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
           sudo apt-get install -y nodejs
 
-      - name: Update package.json
-        run: |
-          jq --arg newname "@abrahamosmonde/emvqr-parser" '.name = $newname' package.json > package-temp.json
-          mv package-temp.json package.json
-
-          jq '.publishConfig.registry = "https://npm.pkg.github.com"' package.json > package-temp.json
-          mv package-temp.json package.json
       - name: Publish package
         run: |
           echo "@abrahamosmonde:registry=https://npm.pkg.github.com" > .npmrc
@@ -68,7 +61,14 @@ jobs:
           SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"
           echo $SEMVER_VERSION
 
-          git add package.json
-          npm version $SEMVER_VERSION
+          jq --arg newname "@abrahamosmonde/emvqr-parser" '.name = $newname' package.json > package-temp.json
+          mv package-temp.json package.json
+          echo "1"
+          jq '.publishConfig.registry = "https://npm.pkg.github.com"' package.json > package-temp.json
+          mv package-temp.json package.json
+          echo "2"
+          jq '.version = "$SEMVER_VERSION"' package.json > package-temp.json
+          mv package-temp.json package.json
+          echo "3"
+
           cat package.json
-          cat .npmrc

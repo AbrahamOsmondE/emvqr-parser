@@ -67,7 +67,7 @@ jobs:
           jq '.publishConfig.registry = "https://npm.pkg.github.com"' package.json > package-temp.json
           mv package-temp.json package.json
           echo "2"
-          jq '.version = "$SEMVER_VERSION"' package.json > package-temp.json
+          jq ".version = \"$SEMVER_VERSION\"" package.json > package-temp.json
           mv package-temp.json package.json
           echo "3"
 

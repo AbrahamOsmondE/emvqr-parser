@@ -63,12 +63,11 @@ jobs:
 
           jq --arg newname "@abrahamosmonde/emvqr-parser" '.name = $newname' package.json > package-temp.json
           mv package-temp.json package.json
-          echo "1"
+
           jq '.publishConfig.registry = "https://npm.pkg.github.com"' package.json > package-temp.json
           mv package-temp.json package.json
-          echo "2"
+
           jq ".version = \"$SEMVER_VERSION\"" package.json > package-temp.json
           mv package-temp.json package.json
-          echo "3"
 
-          cat package.json
+          npm publish

@@ -23,3 +23,35 @@ jobs:
         run: |
           npm run build
           npm run test
+  prepublish_package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm build
+
+      - name: Config Github
+        run: |
+          git config --global user.email abraham.osmond@gmail.com
+          git config --global user.name abrahamosmonde
+      - name: Publish package
+        run: |
+          echo "@abrahamosmonde:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
+          BUILD_VERSION=$(npm pkg get version 2> /dev/null | sed 's/"//g')
+          SHORT_COMMIT=$(git rev-parse --short HEAD)
+          SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"
+          sed -i 's|"name": "emvqr-parser"|"name": "@abrahamosmonde/emvqr-parser"|' package.json
+          sed -i 's/"publishConfig": { "registry": "https://registry.npmjs.org" }/"publishConfig": { "registry": "https://npm.pkg.github.com" }/' package.json
+          npm version $SEMVER_VERSION
+          cat package.json
+          cat .npmrc

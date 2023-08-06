@@ -45,19 +45,24 @@ jobs:
         run: |
           git config --global user.email abraham.osmond@gmail.com
           git config --global user.name abrahamosmonde
-  
+      - name: Update package.json
+        run: |
+          const fs = require('fs');
+          const packageJsonPath = 'package.json';
+          const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+
+          packageJson.name = '@abrahamosmonde/emvqr-parser';
+          packageJson.publishConfig.registry = 'https://npm.pkg.github.com';
+
+          fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
       - name: Publish package
         run: |
-          echo "package.json > .gitignore"
           echo "@abrahamosmonde:registry=https://npm.pkg.github.com" > .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
           BUILD_VERSION=$(npm pkg get version 2> /dev/null | sed 's/"//g')
           SHORT_COMMIT=$(git rev-parse --short HEAD)
           SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"
           echo $SEMVER_VERSION
-          sed -i 's|"name": "emvqr-parser"|"name": "@abrahamosmonde/emvqr-parser"|g' package.json
-          cat package.json
-          sed -i 's|"registry": "https://registry.npmjs.org"|"registry": "https://npm.pkg.github.com"|g' package.json
           npm version $SEMVER_VERSION
           cat package.json
           cat .npmrc

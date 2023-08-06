@@ -45,16 +45,20 @@ jobs:
         run: |
           git config --global user.email abraham.osmond@gmail.com
           git config --global user.name abrahamosmonde
+      - name: Install jq and node
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+          curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+
       - name: Update package.json
         run: |
-          const fs = require('fs');
-          const packageJsonPath = 'package.json';
-          const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+          jq --arg newname "@abrahamosmonde/emvqr-parser" '.name = $newname' package.json > package-temp.json
+          mv package-temp.json package.json
 
-          packageJson.name = '@abrahamosmonde/emvqr-parser';
-          packageJson.publishConfig.registry = 'https://npm.pkg.github.com';
-
-          fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+          jq '.publishConfig.registry = "https://npm.pkg.github.com"' package.json > package-temp.json
+          mv package-temp.json package.json
       - name: Publish package
         run: |
           echo "@abrahamosmonde:registry=https://npm.pkg.github.com" > .npmrc

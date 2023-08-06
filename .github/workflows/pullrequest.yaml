@@ -51,7 +51,9 @@ jobs:
           BUILD_VERSION=$(npm pkg get version 2> /dev/null | sed 's/"//g')
           SHORT_COMMIT=$(git rev-parse --short HEAD)
           SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"
+          echo $SEMVER_VERSION
           sed -i 's|"name": "emvqr-parser"|"name": "@abrahamosmonde/emvqr-parser"|g' package.json
+          cat package.json
           sed -i 's|"registry": "https://registry.npmjs.org"|"registry": "https://npm.pkg.github.com"|g' package.json
           npm version $SEMVER_VERSION
           cat package.json

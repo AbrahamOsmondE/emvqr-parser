@@ -1,6 +1,12 @@
 ## About
 JavaScript library for parsing EMV [QR Codes for Payment Systems Merchant-Presented Mode](https://www.emvco.com/specifications/emv-qr-code-specification-for-payment-systems-emv-qrcps-merchant-presented-mode/)
 
+For development, you can test your change by creating a pull request. Go to prepublish_package of the checks section, then on the Publish Package step, you will get something like this at the bottom: @abrahamosmonde/emvqr-parser@1.0.3-c792fd6
+
+You can then install `@abrahamosmonde/emvqr-parser` with version `1.0.3-c792fd6` to test the changes you made as a package
+
+Don't forget to update the version everytime you plan on merging a pull-request to main
+
 ## Installation
 ```
 npm install emvqr-parser

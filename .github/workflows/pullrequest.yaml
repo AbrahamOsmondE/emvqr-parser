@@ -39,13 +39,16 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+          npm run build
 
       - name: Config Github
         run: |
           git config --global user.email abraham.osmond@gmail.com
           git config --global user.name abrahamosmonde
+  
       - name: Publish package
         run: |
+          echo "package.json > .gitignore"
           echo "@abrahamosmonde:registry=https://npm.pkg.github.com" > .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
           BUILD_VERSION=$(npm pkg get version 2> /dev/null | sed 's/"//g')

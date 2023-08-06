@@ -67,6 +67,8 @@ jobs:
           SHORT_COMMIT=$(git rev-parse --short HEAD)
           SEMVER_VERSION="$BUILD_VERSION-$SHORT_COMMIT"
           echo $SEMVER_VERSION
+
+          git add package.json
           npm version $SEMVER_VERSION
           cat package.json
           cat .npmrc
